@@ -22,14 +22,13 @@
 <body>
     <div class="container-fluid">
         <a href="{% url 'index' %}" class="" style="text-decoration: none; color: #475bc1;">
-            <h1 class=" text-center" style="font-size: 3vw;">Your Todo App( Desktop Version)</h1>
+            <h1 class="text-center">Your Todo App( Desktop Version)</h1>
         </a>
     </div>
-    <div class="container-fluid">
-        <div class="d-flex flex-row">
-            <!-- container div 1 -->
-            <div class="col-4 bg-secondary text-white p-4">
-                <h1 class="text-center " style="font-size: 3vw;">Create Todo</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="background-color: rgb(183, 241, 183);">
+                <h1 class="text-center">Create Todo</h1>
                 {% if messages %}
                 {% for messages in messages %}
                 <div class="alert alert-primary text-center" role="alert">
@@ -37,59 +36,28 @@
                 </div>
                 {% endfor %}
                 {% endif %}
-                <form action="" method="post" novalidate>
+                <form action="" method="post">
                     {% csrf_token %}
-                    <label for="task">Task</label><br>
-                    {{fm.task}}
+                    {{ fm }}
                     <br>
-                    <label for="task">Details</label><br>
-                    {{fm.details}}
-                    <br>
-                    <label for="task">Priority</label><br>
-                    {{fm.priority}}
-
-                    <label for="task">Completed</label><br>
-                    {{fm.completed}}
-                    <br>
-                    <br>
-                    <input type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-            <!-- container div 2 -->
-            <div class="col-8 p-4 mx-2">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Task</th>
-                            <th scope="col">Details</th>
-                            <th scope="col">Completed</th>
-                            <th scope="col">Priority</th>
-                            <th scope="col">Created at</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for tm in todomodel %}
-                            <th scope="row">{{tm.id}}</th>
-                            <td>{{tm.task}}</td>
-                            <td>{{tm.details}}</td>
-                            <td>{{tm.completed}}</td>
-                            <td>{{tm.priority}}</td>
-                            <td>{{tm.created_at}}</td>
-                            <td><a class="btn btn-outline-info" href="{% url 'modify' tm.id %}" role="button">Edit</a>
-                                <a class="btn btn-outline-danger" href="{% url 'delete' tm.id %}"
-                                    role="button">Delete</a></td>
-
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="col-md-6" style="background-color: rgb(200, 236, 246);">
+                <h1 class="text-center">Todo Details</h1>
+                {% for tm in todomodel %}
+                <div style="background-color: rgb(200, 236, 246); margin: 2px;">
+                    <h6>{{forloop.counter}}: {{tm.task}} ({{tm.created_at}})</h6>
+                    <p>{{tm.details}}</p>
+                    <p>Priority : {{tm.priority}} Completed : {{tm.completed}}</p>
+                    <a class="btn btn-outline-info" href="{% url 'modify' tm.id %}" role="button">Edit</a>
+                    <a class="btn btn-outline-danger" href="{% url 'delete' tm.id %}" role="button">Delete</a></td>
+                    <p></p>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

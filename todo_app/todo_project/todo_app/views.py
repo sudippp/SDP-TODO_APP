@@ -40,5 +40,3 @@ def delete(request,pk=0):
     return redirect('/')
 
 
-def text(request):
-    return render(request,'index2.html')

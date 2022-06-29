@@ -5,5 +5,4 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('modify/<int:pk>/', views.modify, name='modify'),
     path('delete/<int:pk>/', views.delete, name='delete'),
-    path('text', views.text, name='text'),
 ]
